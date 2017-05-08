@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static',filename='lib/css/keen-dashboards.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='lib/css/dc.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='css/style.css')}}">
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/#/">Trading Live Dashboard</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('userStats') }}">User Stats</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="{{ url_for ('static', filename='lib/js/jquery.min.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/bootstrap.min.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/crossfilter.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/d3.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/dc.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/queue.js')}}"></script>
+        <script src="{{ url_for ('static', filename='lib/js/keen.min.js')}}"></script>
+        <script src="{{ url_for ('static', filename='js/graph.js')}}"></script>
+    </body>
+</html>
