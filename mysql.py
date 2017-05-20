@@ -1,7 +1,50 @@
 import MySQLdb as _mysql
 import json
 
-# Connection details for `my_db` database
+
+class MySQLDatabase(object):
+    """Define driver class"""
+    def __init__(self, database_name, username, password, host='localhost'):
+        """Connecting to the Database"""
+        try:
+            self.db = _mysql.connect(db=database_name, host=host, user=username, passwd=password)
+            self.database_name = database_name
+            print "connected to MySQL!"
+        except _mysql.Error, e:
+            print e
+
+    def __del__(self):
+        """Testing to make sure the connection is made"""
+        if hasattr(self, 'db'):
+            self.db.close()
+            print "MySQL Connection Closed"
+
+    def get_available_tables(self):
+        """Show available tables"""
+        cursor = self.db.cursor()
+        cursor.execute("Show Tables;")
+
+        self.tables = cursor.fetchall()
+
+        cursor.close()
+
+        return self.tables
+
+    def get_columns_for_table(self, table_name):
+        """
+        This method will enable to interact
+        with our database to find what columns
+        are currently in a specific table
+        """
+        cursor = self.db.cursor()
+        cursor.execute("SHOW COLUMNS FROM `%s`" % table_name)
+        self.columns = cursor.fetchall()
+
+        cursor.close()
+
+        return self.columns
+
+#Connection details for `my_db` database
 db = _mysql.connect(
     db='trading-live',
     host='localhost',
@@ -23,5 +66,5 @@ def searchDB():
     #return json.dumps(cursor.rowcount)
     cursor.close()
 
-searchDB()
+#searchDB()
 
