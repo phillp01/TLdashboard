@@ -3,4 +3,11 @@
     <h1>Database Test Page</h1>
     <h3>Current Available Tables in the DB</h3>
     <div>{{ tables }}</div>
+
+    <select>
+  <%for item in {{ tables }}%>
+      <option value="something"><%= item.name %><option>
+    <%
+        %>
+</select>
 {% endblock %}

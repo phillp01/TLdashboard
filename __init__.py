@@ -1,6 +1,7 @@
 from flask import Flask, send_file, render_template
 from mysql import *
 from settings import db_config
+import itertools
 import json
 
 app = Flask(__name__)
@@ -29,8 +30,9 @@ def dash_project():
 
 @app.route('/testPage')
 def testPage():
-    return render_template('testPage.html', tables = db.get_available_tables(), columns = db.get_columns_for_table())
+    return render_template('testPage.html', tables = [val for sublist in list(db.get_available_tables()) for val in sublist])#, columns = db.get_columns_for_table())
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1')
 
+#[val for sublist in db.get_available_tables() for val in sublist]
